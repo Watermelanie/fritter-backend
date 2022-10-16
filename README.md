@@ -313,3 +313,100 @@ This renders the `index.html` file that will be used to interact with the backen
 **Throws**
 
 - `403` if the user is not logged in
+
+
+#### `GET /api/reactions` - Get reactions to a freet
+
+**Returns**
+
+- An array of reactions to a freet
+
+**Throws**
+
+- `404` if the freetId is invalid
+
+#### `GET /api/reactions?type` - Get type of reaction to a freet
+
+**Returns**
+
+- An array of reactions of `type` to a freet
+
+**Throws**
+
+- `404` if the freetId is invalid
+
+#### `POST /api/reactions` - Create a reaction
+
+**Body**
+
+- `reaction` _{string}_ - The reaction
+
+**Returns**
+
+- A success message
+- An object with the updated reactions
+
+**Throws**
+
+- `404` if the freetId is invalid
+
+#### `GET /api/report` - Get reports to a freet
+
+**Returns**
+
+- An array of reports of a freet
+
+**Throws**
+
+- `404` if the freetId is invalid
+
+#### `POST /api/report?type` - Create a report
+
+**Body**
+
+- `report` _{string}_ - The report
+
+**Returns**
+
+- A success message
+- An object with the updated reports
+
+**Throws**
+
+- `404` if the freetId is invalid
+
+#### `GET /api/sensitivitySetting` - Get a user's sensitivity setting
+
+**Returns**
+
+- An array of sensitivity settings of a user
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `PUT /api/sensitivitySetting` - Modify a user's sensitivity setting
+
+**Body**
+
+- `user` _{string}_ - The user
+- `setting` _{string}_ - The setting
+
+**Returns**
+
+- A success message
+- An object with the updated settings
+
+**Throws**
+
+- `404` if the userId is invalid
+
+#### `GET /api/reactedFreets` - Get reacted freets of a user
+
+**Returns**
+
+- An array of freets
+
+**Throws**
+
+- `404` if the userId is invalid
