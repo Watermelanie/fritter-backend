@@ -2,6 +2,7 @@ import type {Request, Response} from 'express';
 import express from 'express';
 import FreetCollection from '../freet/collection';
 import UserCollection from './collection';
+import SensitivitySettingCollection from '../sensitivitySetting/collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
 
@@ -86,6 +87,7 @@ router.post(
   ],
   async (req: Request, res: Response) => {
     const user = await UserCollection.addOne(req.body.username, req.body.password);
+    const setting = await SensitivitySettingCollection.addOne(user._id);
     req.session.userId = user._id.toString();
     res.status(201).json({
       message: `Your account was created successfully. You have been logged in as ${user.username}`,

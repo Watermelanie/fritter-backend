@@ -41,7 +41,12 @@ const formsAndHandlers = {
   'delete-freet': deleteFreet,
   'create-report': createReport,
   'view-all-reports': viewAllReports,
-  'view-reports-by-type': viewReportsByType
+  'view-reports-by-type': viewReportsByType,
+  'show-sensitivity-setting': showSensitivitySetting,
+  'hide-sensitive-content': hideSensitiveContent,
+  'show-sensitive-content': showSensitiveContent,
+  'hide-hidden-freet': hideHiddenFreet,
+  'show-hidden-freet': showHiddenFreet
 };
 
 // Attach handlers to forms

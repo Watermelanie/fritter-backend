@@ -50,9 +50,6 @@ class ReportCollection {
    * @return {Promise<number>} - An count of all of the reports
    */
   static async getCountofAll(freetId: Types.ObjectId | string): Promise<number> {
-    // Y const freet = await FreetCollection.findOne(freetId);
-    // const count = (await ReportModel.find({freetId: freet._id})).length;
-    // return count;
     const count = (await this.findAll(freetId)).length;
     return count;
   }
@@ -77,9 +74,6 @@ class ReportCollection {
    * @return {Promise<number>} - An count of the type of report
    */
   static async getCountofType(freetId: Types.ObjectId | string, type: string): Promise<number> {
-    // Y const freet = await FreetCollection.findOne(freetId);
-    // const type_ = type;
-    // const count = (await ReportModel.find({freetId: freet._id, type: type_})).length;
     const count = (await this.findAllOfType(freetId, type)).length;
     return count;
   }
