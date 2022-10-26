@@ -203,6 +203,28 @@ This renders the `index.html` file that will be used to interact with the backen
 - A success message
 - A object with the created freet
 
+or
+
+- A warning message
+- A object with the words that triggered the warning
+
+**Throws**
+
+- `403` if the user is not logged in
+- `400` If the freet content is empty or a stream of empty spaces
+- `413` If the freet content is more than 140 characters long
+
+#### `POST /api/freets/warning` - Create a new freet after receiving a warning
+
+**Body**
+
+- `content` _{string}_ - The content of the freet
+
+**Returns**
+
+- A success message
+- A object with the created freet
+
 **Throws**
 
 - `403` if the user is not logged in
@@ -222,6 +244,30 @@ This renders the `index.html` file that will be used to interact with the backen
 - `404` if the freetId is invalid
 
 #### `PUT /api/freets/:freetId?` - Update an existing freet
+
+**Body**
+
+- `content` _{string}_ - The new content of the freet
+
+**Returns**
+
+- A success message
+- An object with the updated freet
+
+or
+
+- A warning message
+- A object with the words that triggered the warning
+
+**Throws**
+
+- `403` if the user is not logged in
+- `404` if the freetId is invalid
+- `403` if the user is not the author of the freet
+- `400` if the new freet content is empty or a stream of empty spaces
+- `413` if the new freet content is more than 140 characters long
+
+#### `PUT /api/freets/:freetId?/warning` - Update an existing freet
 
 **Body**
 
@@ -314,83 +360,56 @@ This renders the `index.html` file that will be used to interact with the backen
 
 - `403` if the user is not logged in
 
-
-#### `GET /api/reactions` - Get reactions to a freet
+#### `GET /api/reports/:freetId` - Get reports to a freet
 
 **Returns**
 
-- An array of reactions to a freet
+- All reports of a freet and count of reports
 
 **Throws**
 
 - `404` if the freetId is invalid
 
-#### `GET /api/reactions?type` - Get type of reaction to a freet
+#### `GET /api/reports/:freetId/:type` - Get type of reports to a freet
 
 **Returns**
 
-- An array of reactions of `type` to a freet
+- All reports of a certain type to a freet and count of those reports
 
 **Throws**
 
 - `404` if the freetId is invalid
+- `404` if type of report is invalid
 
-#### `POST /api/reactions` - Create a reaction
+#### `POST /api/reports/:freetId/:type` - Create a report
 
 **Body**
 
-- `reaction` _{string}_ - The reaction
+- `freetId` _{string}_ - The freet id
+- `type` _{string}_ - The report type
 
 **Returns**
 
 - A success message
-- An object with the updated reactions
+- An object with the report
 
 **Throws**
 
+- `403` if user is not logged in
 - `404` if the freetId is invalid
+- `404` if type of report is invalid
 
-#### `GET /api/report` - Get reports to a freet
+#### `GET /api/sensitivitySettings` - Get a user's sensitivity settings
 
 **Returns**
 
-- An array of reports of a freet
+- An object of sensitivity settings of a user
 
 **Throws**
 
-- `404` if the freetId is invalid
+- `403` if the user is not logged in
 
-#### `POST /api/report?type` - Create a report
-
-**Body**
-
-- `report` _{string}_ - The report
-
-**Returns**
-
-- A success message
-- An object with the updated reports
-
-**Throws**
-
-- `404` if the freetId is invalid
-
-#### `GET /api/sensitivitySetting` - Get a user's sensitivity setting
-
-**Returns**
-
-- An array of sensitivity settings of a user
-
-**Throws**
-
-- `404` if the userId is invalid
-
-#### `PUT /api/sensitivitySetting` - Modify a user's sensitivity setting
-
-**Body**
-
-- `user` _{string}_ - The user
-- `setting` _{string}_ - The setting
+#### `PUT /api/sensitivitySetting/hideSensitiveContent` - Modify a user's sensitivity setting
 
 **Returns**
 
@@ -399,14 +418,37 @@ This renders the `index.html` file that will be used to interact with the backen
 
 **Throws**
 
-- `404` if the userId is invalid
+- `403` if the user is not logged in
 
-#### `GET /api/reactedFreets` - Get reacted freets of a user
+#### `PUT /api/sensitivitySetting/showSensitiveContent` - Modify a user's sensitivity setting
 
 **Returns**
 
-- An array of freets
+- A success message
+- An object with the updated settings
 
 **Throws**
 
-- `404` if the userId is invalid
+- `403` if the user is not logged in
+
+#### `PUT /api/sensitivitySetting/hideHiddenFreet` - Modify a user's sensitivity setting
+
+**Returns**
+
+- A success message
+- An object with the updated settings
+
+**Throws**
+
+- `403` if the user is not logged in
+
+#### `PUT /api/sensitivitySetting/showHiddenFreet` - Modify a user's sensitivity setting
+
+**Returns**
+
+- A success message
+- An object with the updated settings
+
+**Throws**
+
+- `403` if the user is not logged in
