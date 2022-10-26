@@ -23,8 +23,20 @@ function createFreet(fields) {
     .catch(showResponse);
 }
 
+function createFreetAfterWarning(fields) {
+  fetch('/api/freets/warning', {method: 'POST', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
 function editFreet(fields) {
   fetch(`/api/freets/${fields.id}`, {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
+    .then(showResponse)
+    .catch(showResponse);
+}
+
+function editFreetAfterWarning(fields) {
+  fetch(`/api/freets/${fields.id}/warning`, {method: 'PUT', body: JSON.stringify(fields), headers: {'Content-Type': 'application/json'}})
     .then(showResponse)
     .catch(showResponse);
 }

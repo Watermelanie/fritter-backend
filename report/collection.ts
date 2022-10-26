@@ -2,6 +2,7 @@ import type {HydratedDocument, Types} from 'mongoose';
 import type {Report} from './model';
 import ReportModel from './model';
 import FreetCollection from '../freet/collection';
+import ContentFilterCollection from '../contentFilter/collection';
 
 /**
  * This files contains a class that has the functionality to explore reports
@@ -50,7 +51,12 @@ class ReportCollection {
    * @return {Promise<number>} - An count of all of the reports
    */
   static async getCountofAll(freetId: Types.ObjectId | string): Promise<number> {
-    const count = (await this.findAll(freetId)).length;
+    const detect = await ContentFilterCollection.getStatus(freetId);
+    let count = (await this.findAll(freetId)).length;
+    if (detect) {
+      count += 10;
+    }
+
     return count;
   }
 
