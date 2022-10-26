@@ -9,7 +9,6 @@
     "lint": "eslint . --fix --ext=.ts"
   },
   "dependencies": {
-    "censor-sensor": "^1.0.6",
     "debug": "~4.3.4",
     "dotenv": "^16.0.2",
     "eslint": "^8.25.0",
