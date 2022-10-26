@@ -88,6 +88,15 @@ class SensitivitySettingCollection {
     await setting.save();
     return setting.populate('userId');
   }
+
+  /**
+   * Delete setting of a user
+   *
+   * @param {string} userId - The id of author of freets
+   */
+  static async deleteSetting(userId: Types.ObjectId | string): Promise<void> {
+    await SensitivitySettingModel.deleteMany({userId});
+  }
 }
 
 export default SensitivitySettingCollection;

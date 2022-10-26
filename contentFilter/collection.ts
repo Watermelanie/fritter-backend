@@ -79,11 +79,9 @@ class ContentFilterCollection {
    * Delete a content filter with given freetId
    *
    * @param {string} freetId - The freetId of content filter to delete
-   * @return {Promise<Boolean>} - true if the freet has been deleted, false otherwise
    */
-  static async deleteOne(freetId: Types.ObjectId | string): Promise<boolean> {
-    const freet = await ContentFilterModel.deleteOne({freetId});
-    return freet !== null;
+  static async deleteFilter(freetId: Types.ObjectId | string): Promise<void> {
+    await ContentFilterModel.deleteMany({freetId});
   }
 }
 

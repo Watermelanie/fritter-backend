@@ -83,6 +83,24 @@ class ReportCollection {
     const count = (await this.findAllOfType(freetId, type)).length;
     return count;
   }
+
+  /**
+   * Delete all the reports of a freet
+   *
+   * @param {string} freetId - The id of author of freets
+   */
+  static async deleteManyByFreet(freetId: Types.ObjectId | string): Promise<void> {
+    await ReportModel.deleteMany({freetId});
+  }
+
+  /**
+   * Delete all the reports by an author
+   *
+   * @param {string} authorId - The id of author of freets
+   */
+  static async deleteManyByAuthor(authorId: Types.ObjectId | string): Promise<void> {
+    await ReportModel.deleteMany({authorId});
+  }
 }
 
 export default ReportCollection;

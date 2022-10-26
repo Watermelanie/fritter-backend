@@ -5,6 +5,7 @@ import UserCollection from './collection';
 import SensitivitySettingCollection from '../sensitivitySetting/collection';
 import * as userValidator from '../user/middleware';
 import * as util from './util';
+import ReportCollection from '../report/collection';
 
 const router = express.Router();
 
@@ -143,6 +144,8 @@ router.delete(
     const userId = (req.session.userId as string) ?? ''; // Will not be an empty string since its validated in isUserLoggedIn
     await UserCollection.deleteOne(userId);
     await FreetCollection.deleteMany(userId);
+    await SensitivitySettingCollection.deleteSetting(userId);
+    await ReportCollection.deleteManyByAuthor(userId);
     req.session.userId = undefined;
     res.status(200).json({
       message: 'Your account has been deleted successfully.'

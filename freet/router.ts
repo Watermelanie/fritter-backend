@@ -5,6 +5,7 @@ import ContentFilterCollection from '../contentFilter/collection';
 import * as userValidator from '../user/middleware';
 import * as freetValidator from '../freet/middleware';
 import * as util from './util';
+import ReportCollection from '../report/collection';
 
 const router = express.Router();
 
@@ -134,6 +135,8 @@ router.delete(
   ],
   async (req: Request, res: Response) => {
     await FreetCollection.deleteOne(req.params.freetId);
+    await ContentFilterCollection.deleteFilter(req.params.freetId);
+    await ReportCollection.deleteManyByFreet(req.params.freetId);
     res.status(200).json({
       message: 'Your freet was deleted successfully.'
     });
